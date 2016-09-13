@@ -20,7 +20,9 @@ RUN \
 		pip install --no-cache-dir mysqlclient \
 	" && \
 	echo "passenger_python ${VIRTENV}/bin/python3;" >> /etc/nginx/passenger.conf && \
-	/usr/bin/passenger-config validate-install  --auto --no-colors
+	/usr/bin/passenger-config validate-install  --auto --no-colors && \
+  apt-get -y clean && \
+  rm -rf /var/lib/apt/lists/*
 EXPOSE 8080 8443
 WORKDIR /var/www
 
