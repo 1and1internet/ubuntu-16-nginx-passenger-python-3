@@ -13,7 +13,7 @@ set :backend, :docker
 set :docker_image, @image.id
 #set :docker_debug, true
 set :docker_container_start_timeout, 240
-set :docker_container_ready_regex, /Zend Framework 2 should be installed/
+set :docker_container_ready_regex, /READY/
 
 set :docker_container_create_options, {
   'Image'      => @image.id,
@@ -24,7 +24,7 @@ RSpec.configure do |c|
 
   describe "tests" do
     include_examples 'docker-ubuntu-16'
-    include_examples 'docker-ubuntu-16-nginx-1.10.0'
+    # include_examples 'docker-ubuntu-16-nginx-1.10.0'
     include_examples 'passenger-5-tests'
     include_examples 'python-3-tests'
   end
