@@ -5,7 +5,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV VIRTENV /var/www/._venv
 ENV VIRTUAL_ENV_DISABLE_PROMPT true
 ENV PATH $VIRTENV/bin:$PATH
-ENV XDG_CACHE_HOME /var/www/._pipcache
 
 RUN \
 	apt-get update -q && \
@@ -21,9 +20,7 @@ RUN \
 		pip install --no-cache-dir mysqlclient && \
 		pip install --no-cache-dir flask \
 	" && \
-	mkdir -p $XDG_CACHE_HOME && \
 	chmod -R 777 $VIRTENV && \
-	chmod 777 $XDG_CACHE_HOME && \
 	echo "passenger_python ${VIRTENV}/bin/python3;" >> /etc/nginx/passenger.conf && \
 	/usr/bin/passenger-config validate-install  --auto --no-colors && \
   apt-get -y clean && \
