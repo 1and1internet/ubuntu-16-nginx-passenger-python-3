@@ -14,10 +14,11 @@ if [ $EMPTY == 'true' ]; then
             /usr/bin/pyvenv ${VIRTENV}
             source ${VIRTENV}/bin/activate
             python --version
-            python pip --version
-            python pip install --no-cache-dir --upgrade pip
-            python pip install --no-cache-dir mysqlclient
-            python pip install --no-cache-dir flask
+            PIP=$(which pip)
+            python $PIP --version
+            python $PIP install --no-cache-dir --upgrade pip
+            python $PIP install --no-cache-dir mysqlclient
+            python $PIP install --no-cache-dir flask
             # chmod -R 777 $VIRTENV
             cp -r /usr/src/* /var/www
         else
