@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+EMPTY=$([ $(ls -a /var/www | grep -v public | wc -l) -eq 2 ] && echo 'true' || echo 'false')
+
+if [ $EMPTY == 'true' ]; then
+    echo "No files found in /var/www, attempting to get lock"
+    (
+        if flock -n 9; then
+            echo 'Got lock - installing virtual environment'
+            
+            VIRTENV=/var/www/._venv
+            PATH=$VIRTENV/bin:$PATH
+
+            /usr/bin/pyvenv ${VIRTENV}
+            source ${VIRTENV}/bin/activate
+            python --version
+            pip --version
+            pip install --no-cache-dir --upgrade pip
+            pip install --no-cache-dir mysqlclient
+            pip install --no-cache-dir flask
+            # chmod -R 777 $VIRTENV
+            cp -r /usr/src/* /var/www
+        else
+            echo 'No lock, exiting'
+            exit
+        fi
+    ) 9>/var/www/alockfile
+    
+    rm -f /var/www/alockfile
+fi
