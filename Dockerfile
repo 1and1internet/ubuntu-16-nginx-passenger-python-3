@@ -11,7 +11,6 @@ COPY files /
 
 RUN \
 	apt-get update -q && \
-apt-get install -q -o Dpkg::Options::=--force-confdef -y  strace && \
 	apt-get install -q -o Dpkg::Options::=--force-confdef -y virtualenv python3-venv python3-virtualenv python3-all python3-setuptools python3-pip && \
 	apt-get install -q -o Dpkg::Options::=--force-confdef -y python-dev python3-dev python-pip && \
 	pip install requests logging && \
