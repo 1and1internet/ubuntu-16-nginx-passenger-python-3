@@ -24,7 +24,7 @@ build:
       - rspec -f documentation spec/spec_helper.rb
   publish:
     when:
-      branch: master
+      branch: develop
       event: push
     image: 1and1internet/template-library-tools:giraffe
     auth_config:
