@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 EMPTY=$([ $(ls -a /var/www | grep -v public | wc -l) -eq 2 ] && echo 'true' || echo 'false')
 
 if [ $EMPTY == 'true' ]; then
