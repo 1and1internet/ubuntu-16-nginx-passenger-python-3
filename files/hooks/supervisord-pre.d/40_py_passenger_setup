@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 
-EMPTY=$([ $(ls -a /var/www | grep -v public | wc -l) -eq 2 ] && echo 'true' || echo 'false')
+set -e
+
+EMPTY=$([ $(ls -a /var/www | wc -l) -eq 2 ] && echo 'true' || echo 'false')
 
 if [ $EMPTY == 'true' ]; then
     echo "No files found in /var/www, attempting to get lock"
     (
         if flock -n 9; then
             echo 'Got lock - installing virtual environment'
+            mkdir public
             
             VIRTENV=/var/www/._venv
             PATH=$VIRTENV/bin:$PATH
