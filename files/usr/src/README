@@ -1,0 +1,16 @@
+Passenger document root: /var/www/public
+Passenger wsgi entrypoint: /var/www/passenger_wsgi.py
+
+Application restart:
+/var/www $ mkdir -p tmp && touch tmp/restart.txt
+
+Example Django setup
+
+/var/www $ pip install Django
+/var/www $ django-admin startproject mysite
+
+Replace passenger_wsgi.py with:
+
+import sys
+sys.path.insert(1, '/var/www/mysite')
+from mysite.wsgi import application
