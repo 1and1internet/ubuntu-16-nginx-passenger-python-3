@@ -6,7 +6,6 @@ ENV VIRTENV /var/www/._venv
 ENV VIRTUAL_ENV_DISABLE_PROMPT true
 ENV PATH $VIRTENV/bin:$PATH
 
-COPY src /usr/src
 COPY files /
 
 RUN \
