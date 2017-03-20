@@ -2,7 +2,7 @@
 
 set -e
 
-EMPTY=$([ $(ls -A /var/www | egrep -v "._venv|bashrc" | wc -l) -eq 0 ] && echo 'true' || echo 'false')
+EMPTY=$([ $(ls -A /var/www | grep -v "bashrc" | wc -l) -eq 0 ] && echo 'true' || echo 'false')
 
 if [ $EMPTY == 'true' ]; then
     echo "No files found in /var/www, attempting to get lock"
