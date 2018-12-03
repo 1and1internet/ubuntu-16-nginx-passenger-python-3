@@ -93,12 +93,6 @@ class Test1and1Image(Test1and1Common):
         time.sleep(2)
         self.file_mode_test("/var/run/nginx.pid", "-rw-r--r--")
 
-    def test_content(self):
-        time.sleep(5)
-        content = self.execRun("curl -sS http://localhost:8080")
-        print(content)
-        self.assertLess(-1, content.find("This is a sample application using the flask framework on Python 3"))
-
     def test_passenger_version(self):
         version = self.execRun("passenger --version")
         self.assertEqual("Phusion Passenger 6", version[:19])
