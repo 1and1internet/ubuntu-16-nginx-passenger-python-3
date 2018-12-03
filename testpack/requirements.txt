@@ -1,0 +1,2 @@
+selenium==3.8.0
+testpack_helper_library
